@@ -1,0 +1,639 @@
+\documentclass[16.5pt]{beamer}
+%\beamertemplatenavigationsymbolsempty
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath}
+\usepackage[spanish]{babel}
+\usetheme{Singapore}
+%\usetheme{Copenhagen}
+%\usetheme[secheader]{Boadilla}
+%\usetheme{AnnArbor}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{multirow,array}
+\usepackage{tikz}
+\usepackage{ragged2e}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{upquote}
+\usepackage[tikz]{bclogo}
+
+\presetkeys{bclogo}{
+ombre=true,
+epBord=3,
+couleur = blue!15!white,
+couleurBord = red,
+arrondi = 0.2,
+logo=\bctrombone
+}{}
+
+\definecolor{orange}{rgb}{0.03, 0.15, 0.4}
+\colorlet{beamer@blendedblue}{orange!70!white}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption}[numbered]
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\title{Matrices}
+\author{Juan Manuel Rivas Castillo}
+\institute{UNMSM}
+
+\date{\today}
+
+\justifying
+
+
+
+
+\titlegraphic{\vspace{0.1cm}}
+
+
+\begin{document}
+\maketitle 
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Matrices}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.3cm}
+\begin{itemize}
+\item \texttt{ Una {\color{blue} matrix} es un arreglo rectangular de números denotados por:}
+$$\color{blue} A= \mathtt{\begin{pmatrix} a_{11} &  a_{12}  &....&  a_{1k}  \\ 
+a_{21} &  a_{22}  &....&  a_{2k} \\ 
+... & ...&....& ... \\
+... & ...&....& .... \\
+a_{n1} &  a_{n2}  &....& a_{nk} \end{pmatrix}}$$
+
+\end{itemize}
+\texttt{  {\color{red} Ingrese la siguiente matriz en Rstudio} }
+$$A= \mathtt{\begin{pmatrix} 1 & 5 & 6 \\ 2 & 6 & 8 \\ 7 & 1 & 8 \end{pmatrix}}$$
+
+\begin{lstlisting}
+A = matrix(c(1,5,6,2,6,8,7,1,8), nrow=3,byrow=TRUE)
+\end{lstlisting}
+\end{frame}
+
+
+}
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Matrices}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.3cm}
+
+\begin{itemize}
+\item \texttt{ Un {\color{blue} vector fila} es una matriz con una sola fila; mientras que un {\color{blue} vector columna} es una matriz con una sola columna  }
+\item \texttt{ La {\color{blue} dimensión} de una matriz es el número de filas y columnas que esta contiene, si el número de filas es igual all número de columnas se dice que la matriz es cuadrada. Dentro de esta familia de matrices se identifican a las siguientes:}
+\begin{itemize}
+\item \texttt{ La {\color{blue} simétrica} aquella que es igual a su transpuesta}
+\item \texttt{ La {\color{blue} diagonal} aquella cuyos elementos distintos de cero aparecen en la diagonal}
+\item \texttt{ La {\color{blue} escalar} los elementos de la diagonal son iguales}
+\item \texttt{ La {\color{blue} identidad} los elementos de la diagonal son unos}
+\item \texttt{ La {\color{blue} triángular} si los ceros se encuentran por encima de la diagonal es triángular inferior de lo contrario triángular superior}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+}
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Manipulación de Matrices}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.3cm}
+
+\begin{itemize}
+\item \texttt{ {\color{blue} Igualdad de Matrices} Dos matrices son iguales si tienen la misma dimensión y los mismos elementos en las posiciones correspondientes  }
+$\color{blue} A= B$ si y solo si $a_{ik}= b_{ik}$ para todo i y k
+
+\end{itemize}
+
+\begin{lstlisting}
+A==A; A!=A
+A>A; A<A; A>=A; A<=A
+A==A & A!=A
+A==A | A!=A
+\end{lstlisting}
+\begin{itemize}
+\item \texttt{ {\color{blue} Transposición} Significa intercambiar filas por columnas}. Una matriz es simétrica si es igual a su transpuesta. $(A')'=A$. $(AB)' = B'A'$. La transpuesta de un vector fila es un vector columna.
+\end{itemize}
+\begin{lstlisting}
+B = t(A)
+B
+\end{lstlisting}
+
+\end{frame}
+}
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Manipulación de Matrices}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.3cm}
+
+\begin{itemize}
+\item \texttt{ {\color{blue} Suma de Matrices} Para sumar matrices estas deben tener las mismas dimensiones. La matriz cero juega el mismo rol que la suma escalar}
+
+$$\color{black} \mathtt{C = A + B=[a_{ik} + b_{ik}]}$$
+$$\color{black} \mathtt{C = A - B =[a_{ik} - b_{ik}]}$$
+$$\color{black} \mathtt{A + B= B + A}$$
+$$\color{black} \mathtt{(A + B) + C= A +(B + C)}$$
+$$\color{black} \mathtt{(A + B)'= A' +B'}$$
+
+
+\end{itemize}
+\end{frame}
+}
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Manipulación de Matrices}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.3cm}
+
+\begin{itemize}
+
+\item \texttt{ {\color{blue} Multiplicación de Vectores} Para multplicar vectores empleamos {\color{black} producto interno } que significa multiplicar filas por columnas} $ \color{black} \mathtt{a'b = b'a}$
+\item \texttt{ {\color{blue} Multiplicación de Matrices y Multiplicación Escalar} Para una matriz A de dimensión  {\color{blue} n x K} y una matriz B de dimensión  {\color{blue} K x M}, el producto matricial  {\color{blue} C = AB} es una matriz de dimensión   {\color{blue} n x M} cuyos elementos se obtienen del producto interno de las filas de A y las columnas de B.  {\color{blue} Conformables para la multiplicación}. La multiplicación de matrices por lo general es no comutativa  {\color{blue} AB puede existir pero no necesariamente BA, y si existe puede tener diferentes resultados o dimensiones}.  {\color{red} La multiplicación escalar} consiste en multiplicar cada elemento de la matriz por un escalar dado.}
+\end{itemize}
+
+\end{frame}
+}
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Manipulación de Matrices}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.3cm}
+
+
+\texttt{  {\color{red} Hallar A + B, 2A y 2A-3B} }
+$$A= \mathtt{\begin{pmatrix} 1 & -2 & 3  \\ 4 & 5 & -6   \end{pmatrix}}$$
+$$B= \mathtt{\begin{pmatrix} 3 & 0 & 2  \\ -7 & 1 & 8   \end{pmatrix}}$$
+
+\begin{lstlisting}
+A = matrix(c(1,-2,3,4,5,-6),nrow=2, byrow=TRUE)
+B = matrix(c(3,0,2,-7,1,8), nrow=2, byrow=TRUE)
+A+B
+2*A
+2*A-3*B
+\end{lstlisting}
+
+
+\end{frame}
+}
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Manipulación de Matrices}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-2mm} 
+\vspace{0.3cm}
+
+
+\texttt{  {\color{red} Ingrese la siguiente matriz al Rstudio y multipliquela por la matriz A inicial} }
+$$B= \mathtt{\begin{pmatrix} 2 & 8  \\ 1 & 0 \\ 8 & 1  \end{pmatrix}}$$
+
+\begin{lstlisting}
+A = matrix(c(1,5,6,2,6,8,7,1,8),nrow=3,byrow=TRUE)
+B = matrix(c(2,8,1,0,8,1),nrow=3,  byrow=TRUE)
+C = A%*%B
+\end{lstlisting}
+
+Algunas reglas generales que se cumplen para la multiplicación de matrices
+\begin{itemize}
+\item\texttt{{\color{black}Ley Asociativa:} $(AB)C = A(BC)$} 
+\item \texttt{{ \color{black} Ley Distributiva:} $A(B+C) = AB + AC$} 
+\item \texttt{{ \color{black} Transpuesta de un Producto:} $(AB)' = B'A'$} 
+\item \texttt{{ \color{black} Transpuesta de un Producto Extendido:} $(ABC)' = C'B'A'$} 
+
+\end{itemize}
+\end{frame}
+}
+%%%%%%%%%%%%%%%%% SUMA DE VALORES%%%%%%%%%%%%%%%%%%%
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Suma de Valores}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.5cm}
+
+
+\texttt{  {\color{blue} Sea un vector i que es una columna de unos, entonces:} }
+
+$$\sum_{i=1}^n x_i = x_1 + x_2 + .....+ x_n = \color{black} \mathtt{i'x}$$
+
+
+
+\begin{bclogo}{Ejercicio 1}
+ {\small\color{blue} Cargar la base de datos Data1.dat en Rstudio en la cual se encuentran 5 columnas (x1, x2, x3, x4 y x5), obtenga el estadístico de suma para x1}
+\begin{lstlisting}
+setwd('F:\\UNMSM\\EI')
+Da1 = read.csv('Data1.dat',header=FALSE, sep = "")
+Unos = matrix(rep(1,dim(Da1)[1]))
+x1 = as.matrix(Da1$V1)
+Sx1 = t(Unos)%*%x1
+
+\end{lstlisting}
+\end{bclogo}
+
+\end{frame}
+}
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Suma de Valores}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.5cm}
+
+{\color{blue} Si todos los elementos en x son iguales a la misma constante a, entonces $x=ai$} 
+
+$$\sum_{i=1}^n x_i = i'(ai) = a(i'i) = na$$
+
+\texttt{  {\color{blue} Para cualquier constante a} }
+
+$$\sum_{i=1}^n a x_i =a\sum_{i=1}^n  x_i= ai'x$$
+
+\end{frame}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%% P>ROMEDIO%%%%%%%%%%%%%%%%%%%
+
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Suma de Valores}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-2mm} 
+\vspace{0.3cm}
+
+\texttt{{\color{blue} Si a =$\frac{1}{n}$ podemos obtener la media arimética}}
+\begin{tiny}
+\[ \overline{x} = \frac{1}{n}\sum_{i=1}^n  x_i =\frac{1}{n}i'x \]
+\end{tiny}
+
+\begin{bclogo}{Ejercicio 2}
+ {\tiny\color{blue} Empleando la base de datos anterior obtenga el promedio para x1}
+\begin{lstlisting}[basicstyle=\tiny]
+1/dim(Da1)[1]*t(Unos)%*%x1
+\end{lstlisting}
+\end{bclogo}
+
+
+\texttt{  {\color{blue} Si extendemos este resultados tenemos:}}
+
+\begin{tiny}
+\[ \sum_{i=1}^n  x_i^2 = x'x; \sum_{i=1}^n  x_iy_i = x'y \]
+\end{tiny}
+
+
+\begin{bclogo}{Ejercicio 3}
+ {\tiny\color{blue} Empleando la base de datos anterior obtenga el promedio para x1}
+\begin{lstlisting}[basicstyle=\tiny]
+t(x1)%*%x1; x2 = as.matrix(Da1$V2); t(x1)%*%x2
+\end{lstlisting}
+\end{bclogo}
+
+\end{frame}
+}
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Una Matriz Idempotente Útil}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.3cm}
+
+
+
+  {\color{blue} La matriz centrada es aquella que se emplea para transformar una data en sus desviaciones respecto a la media}
+
+$$[x -i\overline{x}] = [x - \frac{1}{n}ii'x] =  [I - \frac{1}{n}ii']x = M^0x$$
+
+\textbf{Matriz de Varianzas y Covarianzas}
+
+$$S= \begin{pmatrix} var(X_1) & cov(X_1, X_2) & .... & cov(X_1, X_k) \\
+cov(X_2, X_1) & var(X_2) & .... & cov(X_2, X_k) \\
+............  & .......   & .... & ............ \\
+cov(X_k, X_1) & cov(X_k, X_2) & .... & cov(X_k, X_k) \\
+\end{pmatrix}$$
+
+ {\color{red}  Esta matriz cuenta con las siguientes características:}
+\begin{itemize}
+\item Cuadrada
+\item Simétrica
+\item Definida Positiva
+\end{itemize}
+
+\end{frame}
+}
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textbf{Varianzas y Covarianzas}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-2mm} 
+\vspace{0.3cm}
+
+La matriz de varianzas y covarianzas poblacional (S) la obtenemos a partir de la siguiente expresión:
+
+\tiny
+$$S = X'M^0X $$
+\normalsize
+
+Tomar en cuenta que el cálculo con un conjunto de datos nos conduce a trabajar con una matriz de varianzas y covarianzas muestral.
+\tiny
+$$S = \frac{1}{n-1}X'M^0X $$
+\normalsize
+
+\begin{bclogo}{Ejercicio 4}
+ {\tiny\color{blue} Empleando la base de datos eurosec.xlsx obtenga la matriz de varianzas y covarianzas}
+\begin{lstlisting}[basicstyle=\tiny]
+eurosec = read_excel("eurosec.xlsx")
+X = as.matrix(eurosec[,2:10])
+F = dim(X)[1]
+C= dim(X)[2]
+Unos = matrix(1,F,1)
+Mo = diag(F)-1/F*Unos%*%t(Unos)
+S = 1/(F-1)*t(X)%*%Mo%*%X
+cov(X)
+var(X[,1])
+\end{lstlisting}
+\end{bclogo}
+
+\end{frame}
+}
+
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textbf{Matriz de Correlaciones}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{1mm}
+\vspace*{-2mm} 
+\vspace{0.2cm}
+
+{\color{blue} Un problema que tiene la matriz S es que conserva las unidades de medida de las variables empleadas; por lo que una solución es la de trabajar con la matriz de correlaciones}
+
+$$ -1 \leq Rho = \frac{cov(x,y)}{\sigma_x \sigma_y} \leq 1$$
+
+$$R= \begin{pmatrix} 1 & Rho(X_1, X_2) & .... & Rho(X_1, X_k) \\
+Rho(X_2, X_1) & 1 & .... & Rho(X_2, X_k) \\
+............  & .......   & .... & ............ \\
+Rho(X_k, X_1) & Rho(X_k, X_2) & .... & 1 \\
+\end{pmatrix}$$
+
+\begin{itemize}
+\item Esta matriz cuenta con las siguientes características: Cuadrada, Simétrica, Traza de la matriz R = C
+\item Para obtener la matriz R a partir de la matriz S realizamos la siguiente operación:
+\end{itemize}
+
+$$ R = D^{-\frac{1}{2}}SD^{-\frac{1}{2}}$$
+
+\end{frame}
+}
+
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textbf{Matriz de Correlaciones}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{1mm}
+\vspace*{-2mm} 
+\vspace{0.2cm}
+
+\begin{bclogo}{Ejercicio 5}
+ {\color{blue} Empleando la matriz de covarianzas anterior obtenga la matriz de correlaciones}
+\begin{lstlisting}[basicstyle=\small]
+D = diag(S)
+for(i in 1: C) {
+    D[i]= D[i]^(-1/2)
+}
+D = diag(D)
+D
+R = D%*%S%*%D
+R
+cor(X)
+\end{lstlisting}
+\end{bclogo}
+\end{frame}
+}
+
+
+
+
+
+
+
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Determinante de una Matriz}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.3cm}
+
+
+
+\texttt{  {\color{blue} El determinante de una matriz se define para matrices cuadradas. El determinante de una matriz es no cero si y solo si es de rango completo}}
+
+
+$$ A= \begin{pmatrix} a & b \\ c & d \end{pmatrix}$$
+
+$$det(A) = ad-bc$$
+
+\begin{itemize}
+\item A es inversible si y solo si $det(A) \neq 0$
+\item Si $det(A) \neq  0$, entonces:
+
+$$ A^{-1} = \frac{1}{det(A)}\begin{pmatrix} d & -b \\ -c & a   \end{pmatrix}$$
+
+\end{itemize}
+
+\end{frame}
+}
+
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Autovalores y Autovectores}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-1mm} 
+\vspace{0.3cm}
+
+\textbf{Autovalores:} Son los valores escalares ($\lambda$) que satisfacen la ecuación característica de una matriz (A), es decir, ($A\mathbf{v} = \lambda\mathbf{v}$). Aquí, ($\mathbf{v}$) es un vector no nulo y ($\lambda$) es el autovalor correspondiente.
+
+\textbf{Autovectores:} Son los vectores ($\mathbf{v}$) que, cuando se multiplican por la matriz (A), resultan en un múltiplo escalar de sí mismos, es decir, ($A\mathbf{v} = \lambda\mathbf{v}$). En otras palabras, la dirección del autovector no cambia tras la transformación por la matriz (A), solo su magnitud se escala por el autovalor ($\lambda$).
+
+\begin{bclogo}{Ejercicio 6}
+ {\tiny\color{blue} Empleando la matriz de correlaciones obtenga sus autovalores y autovectores; demuestre que la suma de los mismos es igual a la traza y la multiplicación es igual a su determinante}
+\begin{lstlisting}[basicstyle=\tiny]
+AV = eigen(R)
+Autovalores = AV$values
+Autovectores = AV$vectors
+sum(Autovalores)
+sum(diag(Autovalores))
+det(R)
+prod(Autovalores)
+\end{lstlisting}
+\end{bclogo}
+\end{frame}
+}
+
+
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Inversa de Matrices}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.3cm}
+
+La inversa de una matriz es una matriz que, cuando se multiplica por la matriz original, da como resultado la matriz identidad. Para una matriz (A), su inversa se denota como ($A^{-1}$) y cumple la siguiente condición:
+
+\[ A \cdot A^{-1} = A^{-1} \cdot A = I \]
+
+donde (I) es la matriz identidad.
+
+Condiciones para que una matriz tenga inversa:
+\begin{itemize}
+\item Debe ser cuadrada: El número de filas y columnas debe ser el mismo.
+\item Debe ser no singular: Su determinante debe ser diferente de cero ($\det(A) \neq 0$).
+\end{itemize}
+
+
+
+
+\end{frame}
+}
+
+{
+\setbeamercolor{background canvas}{bg=yellow!10}
+\begin{frame}[fragile, plain]
+\frametitle{\textsc{\textbf{Inversa de Matrices}}}
+\setbeamercolor{item}{fg=blue}
+\setbeamercolor{normal text}{fg=gray!40!black}
+\usebeamercolor[fg]{normal text}
+\hspace*{-5mm}
+\vspace*{-5mm} 
+\vspace{0.3cm}
+\begin{bclogo}{Ejercicio 7}
+ {\color{blue} Empleando la base de datos KT.dat y considerando las explicaciones en el archivo readme.txt desarrolle el siguiente cálculo: $(X'X)^{-1}X'Y$, en el que Y es Log Hourly Wage  y en X se encuentra una columna de unos y la varaible educación y experiencia}
+\begin{lstlisting}[basicstyle=\small]
+KT = read.csv('KT.dat',   header=FALSE, sep = "")
+Y = as.matrix(KT[,3])
+KT$unos = rep(1,dim(KT)[1])
+X = as.matrix(KT[,c(2:4,6)])
+solve(t(X)%*%X)%*%t(X)%*%Y
+
+
+\end{lstlisting}
+\end{bclogo}
+
+\end{frame}
+}
+
+
+
+
+\end{document}
+
+
