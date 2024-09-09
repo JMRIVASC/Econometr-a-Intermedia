@@ -23,8 +23,8 @@
 \presetkeys{bclogo}{
 ombre=true,
 epBord=3,
-couleur = blue!15!white,
-couleurBord = red,
+couleur = black!15!white,
+couleurBord = yellow,
 arrondi = 0.2,
 logo=\bctrombone
 }{}
@@ -72,8 +72,6 @@ logo=\bctrombone
 \begin{document}
 \maketitle 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Matrices-Descripción %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
 \begin{frame}[fragile, plain]
@@ -96,15 +94,17 @@ a_{n1} &  a_{n2}  &....& a_{nk} \end{pmatrix}}$$
 \texttt{  {\color{red} Ingrese la siguiente matriz en Rstudio} }
 $$A= \mathtt{\begin{pmatrix} 1 & 5 & 6 \\ 2 & 6 & 8 \\ 7 & 1 & 8 \end{pmatrix}}$$
 
-\begin{lstlisting}
-A = matrix(c(1,5,6,2,6,8,7,1,8), nrow=3,byrow=TRUE)
-\end{lstlisting}
+ \centerline{\rule{13cm}{0.4pt}}
+
+
+\texttt{A = matrix(c(1,5,6,2,6,8,7,1,8), nrow=3,byrow=TRUE)}
+
+
+
 \end{frame}
 
 
 }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Matrices-Descripción %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
@@ -131,7 +131,6 @@ A = matrix(c(1,5,6,2,6,8,7,1,8), nrow=3,byrow=TRUE)
 \end{frame}
 
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Manipulación de Matrices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
@@ -156,18 +155,17 @@ A>A; A<A; A>=A; A<=A
 A==A & A!=A
 A==A | A!=A
 \end{lstlisting}
+
 \begin{itemize}
 \item \texttt{ {\color{blue} Transposición} Significa intercambiar filas por columnas}. Una matriz es simétrica si es igual a su transpuesta. $(A')'=A$. $(AB)' = B'A'$. La transpuesta de un vector fila es un vector columna.
 \end{itemize}
-\begin{lstlisting}
+ \centerline{\rule{13cm}{0.4pt}}
 B = t(A)
-B
-\end{lstlisting}
+
+
 
 \end{frame}
 }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Manipulación de Matrices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
@@ -194,8 +192,6 @@ $$\color{black} \mathtt{(A + B)'= A' +B'}$$
 \end{frame}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Manipulación de Matrices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
 \begin{frame}[fragile, plain]
@@ -215,7 +211,7 @@ $$\color{black} \mathtt{(A + B)'= A' +B'}$$
 
 \end{frame}
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Manipulación de Matrices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
 \begin{frame}[fragile, plain]
@@ -232,18 +228,22 @@ $$\color{black} \mathtt{(A + B)'= A' +B'}$$
 $$A= \mathtt{\begin{pmatrix} 1 & -2 & 3  \\ 4 & 5 & -6   \end{pmatrix}}$$
 $$B= \mathtt{\begin{pmatrix} 3 & 0 & 2  \\ -7 & 1 & 8   \end{pmatrix}}$$
 
-\begin{lstlisting}
+ \centerline{\rule{13cm}{0.4pt}}
 A = matrix(c(1,-2,3,4,5,-6),nrow=2, byrow=TRUE)
+
 B = matrix(c(3,0,2,-7,1,8), nrow=2, byrow=TRUE)
+
 A+B
+
 2*A
+
 2*A-3*B
-\end{lstlisting}
+
 
 
 \end{frame}
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Manipulación de Matrices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
 \begin{frame}[fragile, plain]
@@ -267,10 +267,10 @@ C = A%*%B
 
 Algunas reglas generales que se cumplen para la multiplicación de matrices
 \begin{itemize}
-\item\texttt{{\color{black}Ley Asociativa:} $(AB)C = A(BC)$} 
+\item\texttt{{\color{black} Ley Asociativa:} $(AB)C = A(BC)$} 
 \item \texttt{{ \color{black} Ley Distributiva:} $A(B+C) = AB + AC$} 
-\item \texttt{{ \color{black} Transpuesta de un Producto:} $(AB)' = B'A'$} 
-\item \texttt{{ \color{black} Transpuesta de un Producto Extendido:} $(ABC)' = C'B'A'$} 
+\item \texttt{{ \color{black} Transpuesta de un Producto:} $(AB)' = B'A'$ y $(ABC)' = C'B'A'$ } 
+
 
 \end{itemize}
 \end{frame}
@@ -308,8 +308,6 @@ Sx1 = t(Unos)%*%x1
 
 \end{frame}
 }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Suma de Valores %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
@@ -380,8 +378,6 @@ t(x1)%*%x1; x2 = as.matrix(Da1$V2); t(x1)%*%x2
 \end{frame}
 }
 
-%%%%%%%%%%%%%%%%% Matriz Mo %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
 \begin{frame}[fragile, plain]
@@ -416,8 +412,6 @@ cov(X_k, X_1) & cov(X_k, X_2) & .... & cov(X_k, X_k) \\
 
 \end{frame}
 }
-
-%%%%%%%%%%%%%%%%% Matriz Varianzas y Covarianzas %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
@@ -459,7 +453,6 @@ var(X[,1])
 \end{frame}
 }
 
-%%%%%%%%%%%%%%%%% Matriz de Correlaciones %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
@@ -492,7 +485,6 @@ $$ R = D^{-\frac{1}{2}}SD^{-\frac{1}{2}}$$
 \end{frame}
 }
 
-%%%%%%%%%%%%%%%%% Matriz de Correlaciones %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
@@ -526,7 +518,7 @@ cor(X)
 
 
 
-%%%%%%%%%%%%%%%%% Determinante de una Matriz %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 {
@@ -560,7 +552,6 @@ $$ A^{-1} = \frac{1}{det(A)}\begin{pmatrix} d & -b \\ -c & a   \end{pmatrix}$$
 \end{frame}
 }
 
-%%%%%%%%%%%%%%%%% Autovalores y Autovectores %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
@@ -592,7 +583,7 @@ prod(Autovalores)
 \end{frame}
 }
 
-%%%%%%%%%%%%%%%%% Inversa de una Matriz %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
@@ -622,7 +613,7 @@ Condiciones para que una matriz tenga inversa:
 
 \end{frame}
 }
-%%%%%%%%%%%%%%%%% Inversa de una Matriz %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 {
 \setbeamercolor{background canvas}{bg=yellow!10}
 \begin{frame}[fragile, plain]
