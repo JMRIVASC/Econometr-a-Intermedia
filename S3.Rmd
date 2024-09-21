@@ -1,0 +1,32 @@
+---
+title: "Mínimos Cuadrados Ordinarios"
+author: "Prof. Juan Manuel Rivas Castillo"
+date: "`r Sys.Date()`"
+output:
+  beamer_presentation:
+    keep_tex: yes
+    theme: metropolis
+    latex_engine: xelatex
+    slide_level: 2
+    incremental: no
+fontsize: 12pt
+classoption: compress
+header-includes:
+  - \setbeamercolor{frametitle}{bg=darkgray}
+  - \hypersetup{colorlinks,citecolor=orange,filecolor=red,linkcolor=brown,urlcolor=blue}
+  - \usepackage{tcolorbox}
+---
+
+## First Slide
+
+
+```{=latex}
+
+\definecolor{shadecolor}{RGB}{249, 247, 223}
+
+\newtcolorbox{codebox}{
+    colback=shadecolor,
+    colframe=orange,
+    boxsep=2pt,
+    arc=2pt}
+```
