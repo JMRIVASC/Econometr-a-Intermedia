@@ -1,0 +1,134 @@
+---
+title: "S8: ENAHO"
+author: "Juan Manuel Rivas Castillo"
+
+date: "Junio 2022"
+fontsize: 16pt
+institute: "UNMSM"
+output: beamer_presentation
+theme: "Warsaw"
+keep_tex: true
+header-includes:
+  - \AtBeginDocument{\title[jrivasc@unmsm.edu.pe]{ENAHO}}
+  - \AtBeginDocument{\author[Juan Manuel Rivas]{Juan Manuel Rivas}}
+  - \colorlet{beamer@blendedblue}{green!50!black}
+  - \usepackage{xcolor}
+  - \definecolor{olive}{rgb}{0.3, 0.4, .1}
+  - \setbeamercolor{itemize/enumerate body}{fg=blue}
+  - \setbeamercolor{frametitle}{fg=red}
+  - \setbeamertemplate{itemize item}{\color{red}$\blacktriangleright$}
+  - \setbeamertemplate{itemize subitem}{\color{green}$\blacktriangleright$}
+  - \usepackage{pgfplots}
+  - \pgfplotsset{compat = newest}
+  - \usetikzlibrary{positioning, arrows.meta}
+  - \usepgfplotslibrary{fillbetween}
+  - \usepackage{amsmath}
+  - \usepackage{amsfonts}
+  - \usepackage{latexsym}
+  - \usepackage{tikz}
+  - \usetikzlibrary{arrows}
+  - \usepackage{amssymb}
+  - \usepackage{tcolorbox}
+  - \usepackage{pgfplots}
+  - \usepackage{xcolor}
+  - \usepackage{framed}
+  - \pgfplotsset{compat = 1.8}
+  - \usetikzlibrary{calc}
+  - \usetikzlibrary{positioning}
+  - \usetikzlibrary{arrows}
+  - \usepgfplotslibrary{fillbetween}
+  - \newtheorem{Teorema}{Teorema}
+  - \newtheorem{Ejemplo}{Ejemplo}
+  - \newtheorem{Definicion}{Definición}
+  - \newtheorem{Corolario}{Corolario}
+  - \newtheorem{Prueba}{Prueba}
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+# ENAHO
+
+- Construya un robot para la descarga automática de la base de datos Sumario 2004
+
+- Obtenga el porcentaje de hogares no pobres, pobres extremos y pobres 
+
+- Realice el cálculo por departamento
+
+# Procedimiento 1
+\tiny
+```R
+setwd("C:/Users/Juan Rivas/Desktop/P5")
+library(curl)
+library(foreign)
+#http://iinei.inei.gob.pe/iinei/srienaho/descarga/STATA/280-Modulo34.zip
+w1 = "http://iinei.inei.gob.pe/iinei/srienaho/descarga/STATA/280-Modulo34.zip"
+n1 = "280-Modulo34.zip"
+curl::curl_download(w1,n1)
+unzip(n1)
+setwd(paste(280,"-Modulo34",sep=""))
+d1=list.files(pattern = ".dta")
+file.copy(d1,"C:/Users/Juan Rivas/Desktop/P5")
+```
+
+# Procedimiento 2
+```R
+#install.packages("expss")
+ library(expss)
+s2004 = read.dta(d1)
+table(s2004$pobreza)
+fre(s2004$pobreza, weight = s2004$factor07)
+```
+
+# Procedimiento 3
+\tiny
+
+```R
+# Realice el cálculo por departamento
+require(dplyr)
+s2004$Dpto = as.numeric(substr(s2004$ubigeo,1,2))
+T1=aggregate(factor07 ~ pobreza + Dpto, data = s2004, sum)
+T1
+T2 = group_by(T1, Dpto) %>% mutate(percent = factor07/sum(factor07))
+T2
+```
+
+# ENAHO
+
+- Construya una variable dummy que tome el valor de 1 si el hogar es no pobre y 0 en los otros casos.
+
+- Estime el siguiente modelo 
+
+ $$gashog2d = \alpha + \beta_1 totmieho + \beta_2 Pobre + \epsilon $$
+
+- Corrija la regresión anterior dividiendo $\frac{percepo}{totmieho}$. De acuerdo con ello estime la siguiente regresión:
+
+$$gashog2d = \alpha + \beta_1 \frac{percepo}{totmieho} + \beta_2 Pobre + \epsilon $$
+
+
+# Procedimiento 1
+
+
+```R
+s2004$Pobre = ifelse(s2004$pobreza=="no pobre",1,0)
+```
+
+
+# Procedimiento 2
+
+\tiny
+
+```R
+s2004$Pobre = ifelse(s2004$pobreza=="no pobre",1,0)
+table(s2004$Pobre)
+r1 = lm(gashog2d~Pobre + totmieho ,data=s2004,weights=factor07)
+summary(r1)
+s2004$Ind =s2004$mieperho/s2004$totmieho
+r2 = lm(gashog2d~Pobre + Ind ,data=s2004,weights=factor07)
+summary(r2)
+```
+
